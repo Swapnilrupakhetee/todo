@@ -21,7 +21,25 @@ function App() {
   function clearscreen() {
     setCls("");
   }
-  
+  function toggleTodo(id,completed) {
+    setTodos(currenTodos=>{
+      return currenTodos.map(todo=>{
+        if(todo.id===id){
+          return {...todo,completed}
+        }
+        return todo;
+      })
+
+    })
+  }
+
+  function deleteTodo(id){
+    setTodos(currenTodos=>{
+      return currenTodos.filter(todo=>todo.id!==id)
+    })
+
+  }
+
   
   return (
     <>
@@ -40,12 +58,13 @@ function App() {
         return(
         <li key={todo.id}>
         <label>
-        <input type="checkbox" defaultChecked={todo.completed} />
+        <input type="checkbox" defaultChecked={todo.completed} 
+        onChange={e=> toggleTodo(todo.id,e.target.checked)}/>
         {todo.title}
     
 
         </label>
-        <button className='btn btn-danger'>Delete</button>
+        <button className='btn btn-danger' onClick={()=>deleteTodo(todo.id)}>Delete</button>
         
       </li>
         )
