@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [newItem, setNewItem] = useState("");
   const [todos, setTodos] = useState([]);
+  const [cls,setCls] = useState(todos);
 
   function handleSubmit(e){
     e.preventDefault();
@@ -13,8 +14,12 @@ function App() {
           id:crypto.randomUUID(),title:newItem,completed:false
         },
       ]
-    });
+    })
+    setNewItem("");
 
+  }
+  function clearscreen() {
+    setCls("");
   }
   
   
@@ -26,7 +31,7 @@ function App() {
         <label>New Item</label>
         <input value={newItem} onChange={e=>setNewItem(e.target.value)} type="text" id='item' />
       </div>
-      <button className="btn">Add</button>
+      <button className="btn" onClick={clearscreen}>Add</button>
       
     </form>
     <h1 className="header">Todo List</h1>
